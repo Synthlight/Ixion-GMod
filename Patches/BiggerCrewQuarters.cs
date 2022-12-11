@@ -14,7 +14,7 @@ public class BiggerCrewQuarters {
 
     [HarmonyPrefix]
     public static bool Postfix(ref BuildingActionBehaviourQuarter __instance, ref int __result) {
-        __result = __instance.citizenCapacity * 3;
+        __result = __instance.citizenCapacity * 5;
         return false;
     }
 }

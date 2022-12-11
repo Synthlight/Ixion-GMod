@@ -6,7 +6,7 @@ namespace GMod.Patches;
 
 // ReSharper disable RedundantAssignment, UnusedMember.Global
 [HarmonyPatch]
-public class FastScience {
+public class FastScienceAccrual {
     [HarmonyTargetMethod]
     public static MethodBase TargetMethod() {
         return typeof(CommandBuildingScienceLab).GetMethod(nameof(CommandBuildingScienceLab.GetCooldown), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
@@ -14,6 +14,6 @@ public class FastScience {
 
     [HarmonyPostfix]
     public static void Postfix(ref float __result) {
-        if (__result > 0) __result /= 10;
+        if (__result > 0) __result /= 100;
     }
 }
