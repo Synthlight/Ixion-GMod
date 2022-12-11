@@ -1,22 +1,20 @@
 ﻿using System.Reflection;
-using BulwarkStudios.Stanford.Torus.Buildings.Actions;
+using BulwarkStudios.Stanford.Torus.Buildings;
 using HarmonyLib;
 
 namespace GMod.Patches;
 
-// Doesn't actually work for some reason. Needs further investigation.
-
 // ReSharper disable RedundantAssignment, UnusedMember.Global
-//[HarmonyPatch]
+[HarmonyPatch]
 public class MoreTransporters {
     [HarmonyTargetMethod]
     public static MethodBase TargetMethod() {
-        return typeof(BuildingActionBehaviourStockpile).GetMethod(nameof(BuildingActionBehaviourStockpile.GetNbTransporters), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+        return typeof(CommandBuildingStockpile).GetMethod(nameof(CommandBuildingStockpile.ManageNormalTransporters), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
     }
 
     [HarmonyPrefix]
-    public static bool Prefix(ref int __result) {
-        __result = 20;
-        return false;
+    public static bool Prefix(ref CommandBuildingStockpile __instance) {
+        __instance.nbTransporter = 0;
+        return true;
     }
 }
