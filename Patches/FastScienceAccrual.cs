@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using BulwarkStudios.Stanford.Core.GameStates;
 using BulwarkStudios.Stanford.Torus.Buildings;
 using HarmonyLib;
 
@@ -13,7 +15,11 @@ public class FastScienceAccrual {
     }
 
     [HarmonyPostfix]
-    public static void Postfix(ref float __result) {
-        if (__result > 0) __result /= 100;
+    public static void Postfix(ref CommandBuildingScienceLab __instance) {
+        try {
+            Game.Common.player.State.Science = 999;
+        } catch (Exception) {
+            // ignored
+        }
     }
 }
