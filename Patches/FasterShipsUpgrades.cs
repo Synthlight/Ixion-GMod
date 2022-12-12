@@ -17,7 +17,7 @@ public class FasterCargoShipUpgrade {
 
     [HarmonyPrefix]
     public static bool Prefix(ref SpaceVehicleActionBehaviourCargoShip __instance) {
-        __instance.expPerResourcesUnloaded = 500f;
+        __instance.expPerResourcesUnloaded = 5000f;
         return true;
     }
 }
