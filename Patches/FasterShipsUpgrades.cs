@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using BulwarkStudios.Stanford.Core.Instances.Commands;
 using BulwarkStudios.Stanford.Core.ObjectDataPattern;
 using BulwarkStudios.Stanford.SolarSystem.SpaceVehicles;
+using BulwarkStudios.Stanford.SolarSystem.SpaceVehicles.Actions;
 using BulwarkStudios.Stanford.SolarSystem.SpaceVehicles.Commands;
 using HarmonyLib;
 
@@ -12,13 +12,12 @@ namespace GMod.Patches;
 public class FasterCargoShipUpgrade {
     [HarmonyTargetMethod]
     public static MethodBase TargetMethod() {
-        return typeof(CommandStorableTransferProcessTimeDependent).GetMethod(nameof(CommandStorableTransferProcessTimeDependent.ResourceTransfered), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+        return typeof(SpaceVehicleActionBehaviourCargoShip).GetMethod(nameof(SpaceVehicleActionBehaviourCargoShip.GetCapacity), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
     }
 
     [HarmonyPrefix]
-    public static bool Prefix(ref CommandStorableTransferProcessTimeDependent __instance) {
-        var ship = __instance.spaceVehicle.Cast<ObjectInstance<SpaceVehicleData, SpaceVehicleState>>();
-        ship.State.Exp += ship.Data.GetExpRequired(ship.State.Level + 1);
+    public static bool Prefix(ref SpaceVehicleActionBehaviourCargoShip __instance) {
+        __instance.expPerResourcesUnloaded = 500f;
         return true;
     }
 }
