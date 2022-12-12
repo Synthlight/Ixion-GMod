@@ -14,7 +14,7 @@ public class NoHullDamage {
     }
 
     [HarmonyPrefix]
-    public static bool Prefix(ref CommandHullConsumption __instance) {
+    public static bool Prefix() {
         Game.Torus.torus.State.HullIntegrity = Game.Torus.torus.State.MaxHullIntegrity;
         return true;
     }
