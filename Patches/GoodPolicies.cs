@@ -15,7 +15,7 @@ public class GoodPolicies {
 
     [HarmonyPrefix]
     public static bool Prefix(ref DecreeState __instance) {
-        __instance.data.options[(Index) __instance.selectedOption].stabilityConsequence = 5;
+        __instance.data.options[(Index) __instance.selectedOption].Cast<DecreeOptionData>().stabilityConsequence = 5;
         return true;
     }
 }
